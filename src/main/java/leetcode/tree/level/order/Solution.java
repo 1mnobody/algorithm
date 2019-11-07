@@ -6,6 +6,7 @@ import java.util.*;
  * Created by wuzhsh on 11/7/2019.
  */
 public class Solution {
+    // BFS
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
         if (root == null) return res;
@@ -24,6 +25,26 @@ public class Solution {
         }
         return res;
     }
+
+    // DFS
+    public List<List<Integer>> levelOrder2(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
+        dfs(res, root, 0);
+        return res;
+    }
+
+    private void dfs(List<List<Integer>> res, TreeNode node, int level) {
+        // 当前层级还没有array来保存数据，则新增一个array
+        if (res.size() == level) {
+            res.add(level, new ArrayList<>());
+        }
+        res.get(level).add(node.val);
+        if(node.left != null) dfs(res, node.left, level+1);
+        if(node.right != null) dfs(res, node.right, level+1);
+    }
+
+
 }
 
 class TreeNode {
