@@ -3,6 +3,15 @@ package leetcode.tree.level.order;
 import java.util.*;
 
 /**
+ * 层序输出树，
+ * 示例：  1
+ *        /\
+ *       3 7
+ *      /\
+ *     8 9
+ * 输出 [[1],[3,7],[8,9]]
+ *
+ * 下面包含了 BFS（广度优先搜索）和 DFS（深度优先搜索），提交时发现 DFS 的运行速度竟然快于 BFS
  * Created by wuzhsh on 11/7/2019.
  */
 public class Solution {
@@ -12,10 +21,10 @@ public class Solution {
         if (root == null) return res;
         Deque<TreeNode> deque = new ArrayDeque<>();
         deque.addLast(root);
-        while(!deque.isEmpty()) {
+        while (!deque.isEmpty()) {
             int size = deque.size();
             List<Integer> tmp = new ArrayList<>();
-            while(size -- > 0) {
+            while (size-- > 0) {
                 TreeNode node = deque.poll();
                 tmp.add(node.val);
                 if (node.left != null) deque.addLast(node.left);
@@ -40,8 +49,8 @@ public class Solution {
             res.add(level, new ArrayList<>());
         }
         res.get(level).add(node.val);
-        if(node.left != null) dfs(res, node.left, level+1);
-        if(node.right != null) dfs(res, node.right, level+1);
+        if (node.left != null) dfs(res, node.left, level + 1);
+        if (node.right != null) dfs(res, node.right, level + 1);
     }
 
 
