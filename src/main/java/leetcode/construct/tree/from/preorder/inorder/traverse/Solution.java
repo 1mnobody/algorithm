@@ -30,5 +30,30 @@ public class Solution {
             return node;
         }
     }
+
+    // 同理，通过中序后序来构造
+    // inorder = [9,3,15,20,7]
+    // postorder = [9,15,7,20,3]
+    public TreeNode buildTree2(int[] inorder, int[] postorder) {
+        return buildTree(postorder, postorder.length - 1, inorder, 0, inorder.length - 1);
+    }
+
+    public TreeNode buildTree2(int[] postorder, int curPostIdx, int[] inOrder, int inLeft, int inRight) {
+        if (inLeft > inRight) return null;
+        TreeNode node = new TreeNode(postorder[curPostIdx]);
+        if (inLeft == inRight) {
+            return node;
+        } else {// 存在子树
+            int i;
+            for (i = inLeft; i <= inRight; i++) {
+                if (inOrder[i] == postorder[curPostIdx]) {
+                    break;
+                }
+            }
+            node.left = buildTree(postorder, curPostIdx - (inRight - i) - 1, inOrder, inLeft, i - 1);
+            node.right = buildTree(postorder, curPostIdx - 1, inOrder, i + 1, inRight);
+            return node;
+        }
+    }
 }
 
