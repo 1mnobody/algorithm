@@ -66,4 +66,30 @@ public class Solution {
         return res;
     }
 
+    public List<List<Integer>> subsets3(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> emptyList = new ArrayList<>();
+        res.add(emptyList);
+        _subsets3(res, emptyList, nums, 0);
+        return res;
+    }
+
+    public void _subsets3(List<List<Integer>> res, List<Integer> preNums, int[] nums, int idx) {
+        if (idx >= nums.length) {
+            return;
+        }
+        // 取i从 idx 到 nums.length，先选择第i个数组成组合数，再选 i 后面的数字与当前的集合组成新的组合数
+        for (int i = idx; i < nums.length; i++) {
+            preNums.add(nums[i]);
+            res.add(new ArrayList<>(preNums));
+            _subsets3(res, new ArrayList<>(preNums), nums, i + 1);
+            preNums.remove(preNums.size() - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        System.out.println(s.subsets3(new int[]{1,2,3}));
+        System.out.println(s.subsets(new int[]{1,2,3}));
+    }
 }
