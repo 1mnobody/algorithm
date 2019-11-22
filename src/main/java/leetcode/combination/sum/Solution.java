@@ -74,6 +74,8 @@ public class Solution {
             if (i > idx && candidates[i] == candidates[i - 1]) {
                 continue;
             }
+            // candidates 已经是有序的，如果第i个已经大于target，说明后续的都不需要在检测了，必定大于target
+            if (candidates[i] > target) return;
             tmp.add(candidates[i]);
             combinationSum(res, tmp, candidates, target - candidates[i], i + 1);
             tmp.remove(tmp.size() - 1);
