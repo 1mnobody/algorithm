@@ -82,7 +82,7 @@ public class Solution {
         for (int i = idx; i < nums.length; i++) {
             preNums.add(nums[i]);
             res.add(new ArrayList<>(preNums));
-            _subsets3(res, new ArrayList<>(preNums), nums, i + 1);
+            _subsets3(res, preNums, nums, i + 1);
             preNums.remove(preNums.size() - 1);
         }
     }
